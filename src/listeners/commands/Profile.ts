@@ -1,5 +1,5 @@
 import { BaseCommandInteraction, Client } from "discord.js";
-import { readXp } from "../../database/database";
+import { readXp } from "../../database/xpDatabase";
 import { Command } from "../Command";
 
 export const Profile: Command = {
