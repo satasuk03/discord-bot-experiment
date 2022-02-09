@@ -1,11 +1,12 @@
 {
   "name": "discord-bot-experiment",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/index.js",
   "repository": "https://github.com/satasuk03/discord-bot-experiment.git",
   "author": "<=>",
   "license": "MIT",
   "scripts": {
+    "build": "tsc --build",
     "start": "ts-node src/Bot.ts"
   },
   "dependencies": {
