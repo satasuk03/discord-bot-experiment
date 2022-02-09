@@ -7,11 +7,11 @@ import {
 } from "typeorm";
 
 @Entity()
-export class UserXp extends BaseEntity {
+export class Player extends BaseEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Column({ type: "varchar" })
+  @Column({ type: "varchar", unique: true })
   @Index()
   clientId!: string;
 

@@ -1,7 +1,7 @@
 import { BaseCommandInteraction, Client } from "discord.js";
-import { readXpLevel } from "../../database/xpDatabase";
+import { getPlayer } from "player/services";
+import { calXpNeeded } from "leveling/services";
 import { Command } from "../Command";
-import { calXpNeeded } from "../levels";
 import { generateBar } from "../messageTemplate/bar";
 
 export const Profile: Command = {
@@ -17,9 +17,14 @@ export const Profile: Command = {
       return;
     }
 
-    const player = await readXpLevel(
-      `${interaction.guildId}:${interaction.member.user.id}`
-    );
+    const player = await getPlayer(interaction.member.user.id);
+    if (!player) {
+      await interaction.followUp({
+        ephemeral: true,
+        content: "You have no profile",
+      });
+      return;
+    }
 
     const content = `**RPG Profile**
 guild: \t${interaction.guildId}

@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc --build",
-    "start": "ts-node src/Bot.ts",
+    "dev": "ts-node -r tsconfig-paths/register src/Bot.ts",
     "db:entity:create": "yarn typeorm entity:create",
     "db:migration:generate": "yarn typeorm migration:generate",
     "db:migration:run": "yarn typeorm migration:run",
