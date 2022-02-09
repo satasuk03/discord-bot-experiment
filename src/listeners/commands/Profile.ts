@@ -1,6 +1,9 @@
 import { BaseCommandInteraction, Client } from "discord.js";
-import { readXp } from "../../database/xpDatabase";
+import { readXpLevel } from "../../database/xpDatabase";
+import { heartEmpty, heartFull } from "../../emojis";
 import { Command } from "../Command";
+import { calXpNeeded } from "../levels";
+import { generateBar } from "../messageTemplate/bar";
 
 export const Profile: Command = {
   name: "profile",
@@ -15,12 +18,19 @@ export const Profile: Command = {
       return;
     }
 
+    const player = await readXpLevel(
+      `${interaction.guildId}:${interaction.member.user.id}`
+    );
+
     const content = `**RPG Profile**
 guild: \t${interaction.guildId}
 name: \t${interaction.user.username}
-XP: \t${await readXp(`${interaction.guildId}:${interaction.member.user.id}`)}`;
-    // currentXp: \t${xpDB.get(interaction.guild.id+interaction.member)}`;
-    // console.log(interaction.guildId, interaction.member.user.id);
+Level: \t${player.level}
+XP: \t${player.xp}/${calXpNeeded(player.level)}
+HP: \t${generateBar("hp", 32, 100)}
+XP: \t${generateBar("xp", player.xp, calXpNeeded(player.level))}
+`;
+
     await interaction.followUp({
       ephemeral: true,
       content,
