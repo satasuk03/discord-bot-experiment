@@ -2,7 +2,8 @@ import { BaseCommandInteraction, Client } from "discord.js";
 import { getPlayer } from "player/services";
 import { calXpNeeded } from "leveling/services";
 import { Command } from "../Command";
-import { generateBar } from "../messageTemplate/bar";
+import { generateBar } from "../../discord/messageTemplate/bar";
+import { createProfileEmbed } from "discord/embeds/profile";
 
 export const Profile: Command = {
   name: "profile",
@@ -26,18 +27,20 @@ export const Profile: Command = {
       return;
     }
 
-    const content = `**RPG Profile**
-guild: \t${interaction.guildId}
-name: \t${interaction.user.username}
-Level: \t${player.level}
-XP: \t${player.xp}/${calXpNeeded(player.level)}
-HP: \t${generateBar("hp", 32, 100)}
-XP: \t${generateBar("xp", player.xp, calXpNeeded(player.level))}
-`;
-
+    // console.log(interaction.user.avatarURL());
     await interaction.followUp({
+      embeds: [
+        createProfileEmbed({
+          playerName: interaction.user.username,
+          hp: 100,
+          maxHp: 100,
+          xp: player.xp,
+          nextLevelNeeded: calXpNeeded(player.level),
+          level: player.level,
+          avatarURL: interaction.user.avatarURL(),
+        }),
+      ],
       ephemeral: true,
-      content,
     });
   },
 };
