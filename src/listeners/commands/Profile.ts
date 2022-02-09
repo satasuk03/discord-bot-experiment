@@ -1,6 +1,5 @@
 import { BaseCommandInteraction, Client } from "discord.js";
 import { readXpLevel } from "../../database/xpDatabase";
-import { heartEmpty, heartFull } from "../../emojis";
 import { Command } from "../Command";
 import { calXpNeeded } from "../levels";
 import { generateBar } from "../messageTemplate/bar";
