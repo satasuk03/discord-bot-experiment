@@ -38,6 +38,7 @@ export const Profile: Command = {
           xp: player.xp,
           nextLevelNeeded: calXpNeeded(player.level),
           level: player.level,
+          balance: player.gfCoinBalance,
           avatarURL: interaction.user.avatarURL(),
         }),
       ],
