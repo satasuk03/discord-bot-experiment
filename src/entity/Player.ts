@@ -17,6 +17,7 @@ export class Player extends BaseEntity {
   @Index()
   clientId!: string;
 
+  // TODO: should be removed and calculate from level and equipment
   @Column({ type: 'integer', default: 100 })
   maxHp!: number;
 
