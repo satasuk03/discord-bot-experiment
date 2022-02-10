@@ -1,12 +1,12 @@
-import { Player } from "entity/Player";
-import { getPlayer } from "player/services";
-import { addDays } from "utils/dateUtils";
-import { Quest } from "./services";
+import { Player } from 'entity/Player';
+import { getPlayer } from 'player/services';
+import { addDays } from 'utils/dateUtils';
+import { Quest } from './services';
 
 export const DailyQuest: Quest = {
-  id: "daily",
-  name: "Daily Quest",
-  desc: "A daily quest",
+  id: 'daily',
+  name: 'Daily Quest',
+  desc: 'A daily quest',
   xpGained: 50,
   gfCoinGained: 100,
   claim: async (player: Player) => {

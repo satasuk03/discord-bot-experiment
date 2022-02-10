@@ -1,4 +1,4 @@
-import { MessageEmbed } from "discord.js";
+import { MessageEmbed } from 'discord.js';
 
 interface CreateLevelUpEmbedParams {
   playerName: string;
@@ -9,21 +9,21 @@ interface CreateLevelUpEmbedParams {
 
 export const createLevelUpEmbed = (profile: CreateLevelUpEmbedParams) =>
   new MessageEmbed()
-    .setColor("#0099ff")
-    .setTitle("Level Up!")
+    .setColor('#0099ff')
+    .setTitle('Level Up!')
     .setAuthor({
       name: `${profile.playerName}`,
-      iconURL: profile.avatarURL ?? "https://i.imgur.com/AfFp7pu.png",
+      iconURL: profile.avatarURL ?? 'https://i.imgur.com/AfFp7pu.png',
     })
-    .setThumbnail(profile.avatarURL ?? "https://i.imgur.com/AfFp7pu.png")
+    .setThumbnail(profile.avatarURL ?? 'https://i.imgur.com/AfFp7pu.png')
     .addFields(
       {
-        name: "```From Level```",
+        name: '```From Level```',
         value: `**${profile.from}**`,
       },
       {
-        name: "```To Level```",
+        name: '```To Level```',
         value: `**${profile.to}**`,
-      }
+      },
     )
-    .setFooter({ text: "Keep growing!" });
+    .setFooter({ text: 'Keep growing!' });

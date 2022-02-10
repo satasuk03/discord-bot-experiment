@@ -1,5 +1,5 @@
-import { MessageEmbed } from "discord.js";
-import { blueBook, goldBar, xpFull } from "emojis";
+import { MessageEmbed } from 'discord.js';
+import { blueBook, goldBar, xpFull } from 'emojis';
 
 interface createQuestDoneEmbedParams {
   playerName: string;
@@ -21,22 +21,22 @@ export const createQuestDoneEmbed = (profile: createQuestDoneEmbedParams) => {
     : null;
 
   return new MessageEmbed()
-    .setColor("#0099ff")
+    .setColor('#0099ff')
     .setTitle(`${blueBook}Quest Done!`)
     .setAuthor({
       name: `${profile.playerName}`,
-      iconURL: profile.avatarURL ?? "https://i.imgur.com/AfFp7pu.png",
+      iconURL: profile.avatarURL ?? 'https://i.imgur.com/AfFp7pu.png',
     })
-    .setThumbnail(profile.avatarURL ?? "https://i.imgur.com/AfFp7pu.png")
+    .setThumbnail(profile.avatarURL ?? 'https://i.imgur.com/AfFp7pu.png')
     .addFields(
       {
         name: `\`\`\`${profile.questName}\`\`\``,
         value: `**${profile.desc}**`,
       },
       {
-        name: "```You got```",
+        name: '```You got```',
         value: `${xpString}${gfCoinString}`,
-      }
+      },
     )
-    .setFooter({ text: "Keep growing!" });
+    .setFooter({ text: 'Keep growing!' });
 };

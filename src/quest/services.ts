@@ -1,6 +1,6 @@
-import { Player } from "entity/Player";
-import { getManager } from "typeorm";
-import activeQuests from "./activeQuests";
+import { Player } from 'entity/Player';
+import { getManager } from 'typeorm';
+import activeQuests from './activeQuests';
 
 export interface Quest {
   id: string;
@@ -25,26 +25,26 @@ interface claimQuestResult {
 export const checkQuest = async (questId: string, clientId: string) => {
   const quest = activeQuests.find((q) => q.id === questId);
   if (!quest) {
-    return { claimable: false, error: "Quest not found!" };
+    return { claimable: false, error: 'Quest not found!' };
   }
   const player = await getManager().getRepository(Player).findOne({ clientId });
   if (!player) {
-    return { claimable: false, error: "Player not found!" };
+    return { claimable: false, error: 'Player not found!' };
   }
   return await quest.check(player);
 };
 
 export const claimQuest = async (
   questId: string,
-  clientId: string
+  clientId: string,
 ): Promise<claimQuestResult> => {
   const quest = activeQuests.find((q) => q.id === questId);
   if (!quest) {
-    return { claimed: false, error: "Quest not found!" };
+    return { claimed: false, error: 'Quest not found!' };
   }
   const player = await getManager().getRepository(Player).findOne({ clientId });
   if (!player) {
-    return { claimed: false, error: "Player not found!" };
+    return { claimed: false, error: 'Player not found!' };
   }
   const { claimable, error } = await quest.check(player);
   if (!claimable) {

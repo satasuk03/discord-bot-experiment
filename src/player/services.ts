@@ -1,5 +1,5 @@
-import { Player } from "entity/Player";
-import { getManager } from "typeorm";
+import { Player } from 'entity/Player';
+import { getManager } from 'typeorm';
 
 export const createPlayer = async (clientId: string) => {
   const newPlayer = await getManager()

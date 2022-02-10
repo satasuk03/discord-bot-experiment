@@ -1,13 +1,13 @@
-import { Client, ClientOptions, Intents } from "discord.js";
-import interactionCreate from "./listeners/interactionCreate";
-import ready from "./listeners/ready";
-import config from "./config";
-import levels from "./listeners/levels";
-import { connectDB } from "./db";
+import { Client, ClientOptions, Intents } from 'discord.js';
+import interactionCreate from './listeners/interactionCreate';
+import ready from './listeners/ready';
+import config from './config';
+import levels from './listeners/levels';
+import { connectDB } from './db';
 
 const token = config.DISCORD_TOKEN;
 
-console.log("Bot is starting...");
+console.log('Bot is starting...');
 
 const client = new Client({
   intents: [
