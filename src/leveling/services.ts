@@ -13,6 +13,8 @@ export const addXP = async (clientId: string, xpToAdd: number) => {
     player = await createPlayer(clientId);
   }
 
+  const fromLevel = player.level;
+
   player.xp = xpToAdd + player.xp;
   let needToLevelUp = calXpNeeded(player.level);
 
@@ -24,5 +26,5 @@ export const addXP = async (clientId: string, xpToAdd: number) => {
     isLevelUp = true;
   }
   await player.save();
-  return isLevelUp;
+  return { isLevelUp, from: fromLevel, to: player.level };
 };
