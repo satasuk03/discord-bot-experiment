@@ -1,7 +1,7 @@
 import { Player } from 'entity/Player';
 import { getPlayer } from 'player/services';
 import { addDays } from 'utils/dateUtils';
-import { Quest } from './services';
+import { Quest } from '../services';
 
 export const DailyQuest: Quest = {
   id: 'daily',

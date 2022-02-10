@@ -1,6 +1,7 @@
 import { Client } from 'discord.js';
 import { createLevelUpEmbed } from 'discord/embeds/levelUp';
 import { addXP } from 'leveling/services';
+import { getRndInteger } from 'utils/random';
 
 export default (client: Client): void => {
   client.on('messageCreate', async (message) => {
@@ -11,10 +12,7 @@ export default (client: Client): void => {
     if (!guild || !member) {
       return;
     }
-    const { isLevelUp, from, to } = await addXP(
-      member.id,
-      Math.ceil(Math.random() * 10), // random exp 1 to 10
-    );
+    const { isLevelUp, from, to } = await addXP(member.id, getRndInteger(1, 5));
     if (isLevelUp) {
       const msg = await message.channel.send({
         embeds: [

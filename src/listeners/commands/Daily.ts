@@ -1,9 +1,8 @@
 import config from 'config';
 import { BaseCommandInteraction, Client } from 'discord.js';
 import { createQuestDoneEmbed } from 'discord/embeds/questDone';
-import { addItem } from 'item/services';
-import { claimDailyQuest, DailyQuest } from 'quest/daily';
-import { checkQuest, claimQuest } from 'quest/services';
+import { DailyQuest } from 'quest/quests';
+import { claimQuest } from 'quest/services';
 import { Command } from '../Command';
 
 export const Daily: Command = {
