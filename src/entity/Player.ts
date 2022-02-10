@@ -4,7 +4,9 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   Index,
+  OneToMany,
 } from 'typeorm';
+import { Inventory } from './Inventory';
 
 @Entity()
 export class Player extends BaseEntity {
@@ -14,6 +16,12 @@ export class Player extends BaseEntity {
   @Column({ type: 'varchar', unique: true })
   @Index()
   clientId!: string;
+
+  @Column({ type: 'integer', default: 100 })
+  maxHp!: number;
+
+  @Column({ type: 'integer', default: 100 })
+  hp!: number;
 
   @Column({ type: 'integer', default: 1 })
   level!: number;
@@ -26,4 +34,7 @@ export class Player extends BaseEntity {
 
   @Column({ type: 'timestamptz', default: new Date('1995-12-17T03:24:00') })
   lastDailyQuest!: Date;
+
+  @OneToMany(() => Inventory, (inv) => inv.clientId)
+  items!: Inventory[];
 }
