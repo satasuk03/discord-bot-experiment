@@ -1,6 +1,8 @@
 import config from "config";
 import { BaseCommandInteraction, Client } from "discord.js";
-import { claimDailyQuest } from "quest/daily";
+import { createQuestDoneEmbed } from "discord/embeds/questDone";
+import { claimDailyQuest, DailyQuest } from "quest/daily";
+import { checkQuest, claimQuest } from "quest/services";
 import { Command } from "../Command";
 
 export const Daily: Command = {
@@ -8,12 +10,6 @@ export const Daily: Command = {
   description: "Daily Quest",
   type: "CHAT_INPUT",
   run: async (client: Client, interaction: BaseCommandInteraction) => {
-    // const content = "Daily Quest Done!";
-
-    // await interaction.followUp({
-    //   ephemeral: true,
-    //   content,
-    // });
     if (!interaction.member) {
       await interaction.followUp({
         ephemeral: true,
@@ -21,14 +17,33 @@ export const Daily: Command = {
       });
       return;
     }
-    const claimable = await claimDailyQuest(interaction.member.user.id);
-    if (!claimable) {
-      const content = "Cannot Claim Daily Quest!";
+
+    const { claimed, error } = await claimQuest(
+      DailyQuest.id,
+      interaction.member.user.id
+    );
+    if (!claimed) {
+      // TODO: create error embed
+      const content = error ?? "Unhandled Error";
       await interaction.followUp({
         ephemeral: true,
         content,
       });
-      return ``;
+      return;
     }
+
+    await interaction.followUp({
+      embeds: [
+        createQuestDoneEmbed({
+          questName: DailyQuest.name,
+          desc: DailyQuest.desc,
+          playerName: interaction.user.username,
+          avatarURL: interaction.user.avatarURL(),
+          xpGained: DailyQuest.xpGained,
+          gfCoinReceived: DailyQuest.gfCoinGained,
+        }),
+      ],
+    });
+    return;
   },
 };

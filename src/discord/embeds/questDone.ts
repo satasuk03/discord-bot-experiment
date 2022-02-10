@@ -13,9 +13,11 @@ interface createQuestDoneEmbedParams {
 }
 
 export const createQuestDoneEmbed = (profile: createQuestDoneEmbedParams) => {
-  const xpString = profile.xpGained ? `+ ${profile.xpGained}${xpFull}\n` : null;
+  const xpString = profile.xpGained
+    ? `+ ${profile.xpGained} ${xpFull}\n`
+    : null;
   const gfCoinString = profile.gfCoinReceived
-    ? `+ ${profile.gfCoinReceived}${goldBar}\n`
+    ? `+ ${profile.gfCoinReceived} ${goldBar}\n`
     : null;
 
   return new MessageEmbed()

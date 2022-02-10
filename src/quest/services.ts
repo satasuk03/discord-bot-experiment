@@ -34,7 +34,10 @@ export const checkQuest = async (questId: string, clientId: string) => {
   return await quest.check(player);
 };
 
-export const claimQuest = async (questId: string, clientId: string) => {
+export const claimQuest = async (
+  questId: string,
+  clientId: string
+): Promise<claimQuestResult> => {
   const quest = activeQuests.find((q) => q.id === questId);
   if (!quest) {
     return { claimed: false, error: "Quest not found!" };
